@@ -10,14 +10,12 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Fallback styles for Mermaid nodes if direct styling fails */
         .actor-node { fill: #E0E7FF; stroke: #6366F1; }
         .agent-node { fill: #D1FAE5; stroke: #10B981; }
         .system-node { fill: #FEF3C7; stroke: #F59E0B; }
         .decision-node { fill: #FEE2E2; stroke: #EF4444; }
         .end-node { fill: #C7D2FE; stroke: #4F46E5; }
         
-        /* Responsive Mermaid diagram styling */
         .mermaid-container {
             width: 100%;
             height: auto;
@@ -32,7 +30,6 @@
             max-width: none !important;
         }
         
-        /* Ensure the SVG scales properly */
         .mermaid svg {
             width: 100% !important;
             height: auto !important;
@@ -40,7 +37,6 @@
             font-size: 14px !important;
         }
         
-        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .mermaid svg {
                 font-size: 12px !important;
@@ -59,17 +55,15 @@
         <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-gray-800 mb-2">Cloud Deployment Agent Workflow</h1>
         <p class="text-center text-gray-500 mb-4 text-sm sm:text-base">A visual representation of the process from customer login to infrastructure deployment.</p>
         
-        <!-- Know More Button -->
         <div class="text-center mb-6">
             <a href="infrastructure.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                Know More About Infrastructure
+                Know More About Our Agent
             </a>
         </div>
         
-        <!-- Mermaid Diagram Container -->
         <div class="mermaid-container w-full">
             <div class="mermaid" id="flowchart">
                 graph TD
@@ -103,7 +97,6 @@
                         R("14. Customer is Happy! 😄")
                     end
 
-                    %% Node Connections
                     A --> B
                     B --> C
                     C -->|No| D
@@ -124,7 +117,6 @@
                     Q --> R
                     O -->|Rejected| G
 
-                    %% Direct Node Styling
                     style A fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
                     style B fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
                     style E fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
@@ -151,11 +143,9 @@
         </div>
     </div>
 
-    <!-- Mermaid.js script -->
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         
-        // Configure Mermaid for better responsiveness and readability
         mermaid.initialize({ 
             startOnLoad: true,
             theme: 'base',
@@ -191,15 +181,12 @@
             }
         });
 
-        // Ensure proper rendering after page load
         window.addEventListener('load', function() {
-            // Force re-render to ensure proper sizing
             setTimeout(() => {
                 mermaid.init(undefined, document.querySelectorAll('.mermaid'));
             }, 100);
         });
 
-        // Handle window resize for responsiveness
         window.addEventListener('resize', function() {
             setTimeout(() => {
                 mermaid.init(undefined, document.querySelectorAll('.mermaid'));
