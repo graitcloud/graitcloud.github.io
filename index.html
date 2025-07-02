@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Deployment Agent Flowchart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Fallback styles for Mermaid nodes if direct styling fails */
+        .actor-node { fill: #E0E7FF; stroke: #6366F1; }
+        .agent-node { fill: #D1FAE5; stroke: #10B981; }
+        .system-node { fill: #FEF3C7; stroke: #F59E0B; }
+        .decision-node { fill: #FEE2E2; stroke: #EF4444; }
+        .end-node { fill: #C7D2FE; stroke: #4F46E5; }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-6xl">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2">Cloud Deployment Agent Workflow</h1>
+        <p class="text-center text-gray-500 mb-8">A visual representation of the process from customer login to infrastructure deployment.</p>
+        
+        <!-- Mermaid Diagram Container -->
+        <div class="mermaid-container flex justify-center">
+            <div class="mermaid" id="flowchart">
+                graph TD
+                    subgraph "Phase 1: Authentication & Setup"
+                        A[1. Customer logs in via Auth API]
+                        B(2. Customer defines cloud requirements in chat)
+                        C{3. Is Knowledge<br>Infra Setup?}
+                        D[Redirect to Vault Setup Page]
+                        E[4. Customer provides<br>M values for Vault]
+                        F[5. Agent verifies Vault and<br>deploys container executor]
+                    end
+
+                    subgraph "Phase 2: Requirement Definition & Code Generation"
+                        G(6. Customer refines cloud<br>resource requirements)
+                        H[7. LLM interacts with customer<br>to satisfy State Schema]
+                        I[8. LLM generates code and<br>Agent organizes it into a repo]
+                        J[9. LLM presents file tree<br>to customer for review]
+                    end
+                    
+                    subgraph "Phase 3: Planning & Approval"
+                        K[10a. LLM commits<br>code to Git]
+                        L[10b. LLM runs<br>Terraform Plan]
+                        M[10c. LLM calls<br>Infra Cost API]
+                        N[11. LLM presents cost report<br>and resource summary]
+                        O{12. Customer Approval?}
+                    end
+
+                    subgraph "Phase 4: Deployment & Completion"
+                        P[13. Agent runs 'terraform apply']
+                        Q[Agent presents logs and<br>output values in chat]
+                        R(14. Customer is Happy! 😄)
+                    end
+
+                    %% Node Connections
+                    A --> B
+                    B --> C
+                    C -->|No| D
+                    D --> E
+                    E --> F
+                    F --> G
+                    C -->|Yes| G
+                    G --> H
+                    H --> I
+                    I --> J
+                    J --> K
+                    K --> L
+                    L --> M
+                    M --> N
+                    N --> O
+                    O -->|Approved| P
+                    P --> Q
+                    Q --> R
+                    O -->|Rejected| G
+
+                    %% Direct Node Styling
+                    style A fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
+                    style B fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
+                    style E fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
+                    style G fill:#E0E7FF,stroke:#6366F1,stroke-width:2px,color:#312E81
+
+                    style F fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style H fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style I fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style J fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style K fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style L fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style M fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style N fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+                    style P fill:#D1FAE5,stroke:#10B981,stroke-width:2px,color:#064E3B
+
+                    style D fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#78350F
+                    style Q fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#78350F
+
+                    style C fill:#FEE2E2,stroke:#EF4444,stroke-width:2px,color:#7F1D1D
+                    style O fill:#FEE2E2,stroke:#EF4444,stroke-width:2px,color:#7F1D1D
+
+                    style R fill:#C7D2FE,stroke:#4F46E5,stroke-width:2px,font-weight:bold,color:#4338CA
+            </div>
+        </div>
+    </div>
+
+    <!-- Mermaid.js script -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
