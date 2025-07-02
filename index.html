@@ -16,45 +16,91 @@
         .system-node { fill: #FEF3C7; stroke: #F59E0B; }
         .decision-node { fill: #FEE2E2; stroke: #EF4444; }
         .end-node { fill: #C7D2FE; stroke: #4F46E5; }
+        
+        /* Responsive Mermaid diagram styling */
+        .mermaid-container {
+            width: 100%;
+            height: auto;
+            overflow-x: auto;
+            overflow-y: visible;
+        }
+        
+        .mermaid {
+            width: 100% !important;
+            height: auto !important;
+            min-height: 80vh;
+            max-width: none !important;
+        }
+        
+        /* Ensure the SVG scales properly */
+        .mermaid svg {
+            width: 100% !important;
+            height: auto !important;
+            max-width: none !important;
+            font-size: 14px !important;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .mermaid svg {
+                font-size: 12px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mermaid svg {
+                font-size: 10px !important;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
-    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-6xl">
-        <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2">Cloud Deployment Agent Workflow</h1>
-        <p class="text-center text-gray-500 mb-8">A visual representation of the process from customer login to infrastructure deployment.</p>
+<body class="bg-gray-50 min-h-screen p-2 sm:p-4 lg:p-6">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-none mx-auto">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-gray-800 mb-2">Cloud Deployment Agent Workflow</h1>
+        <p class="text-center text-gray-500 mb-4 text-sm sm:text-base">A visual representation of the process from customer login to infrastructure deployment.</p>
+        
+        <!-- Know More Button -->
+        <div class="text-center mb-6">
+            <a href="infrastructure.html" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Know More About Infrastructure
+            </a>
+        </div>
         
         <!-- Mermaid Diagram Container -->
-        <div class="mermaid-container flex justify-center">
+        <div class="mermaid-container w-full">
             <div class="mermaid" id="flowchart">
                 graph TD
                     subgraph "Phase 1: Authentication & Setup"
-                        A[1. Customer logs in via Auth API]
-                        B(2. Customer defines cloud requirements in chat)
-                        C{3. Is Knowledge<br>Infra Setup?}
-                        D[Redirect to Vault Setup Page]
-                        E[4. Customer provides<br>M values for Vault]
-                        F[5. Agent verifies Vault and<br>deploys container executor]
+                        A["1. Customer logs in<br/>via Auth API"]
+                        B("2. Customer defines cloud<br/>requirements in chat")
+                        C{"3. Is Knowledge<br/>Infra Setup?"}
+                        D["Redirect to Vault<br/>Setup Page"]
+                        E["4. Customer provides<br/>M values for Vault"]
+                        F["5. Agent verifies Vault and<br/>deploys container executor"]
                     end
 
                     subgraph "Phase 2: Requirement Definition & Code Generation"
-                        G(6. Customer refines cloud<br>resource requirements)
-                        H[7. LLM interacts with customer<br>to satisfy State Schema]
-                        I[8. LLM generates code and<br>Agent organizes it into a repo]
-                        J[9. LLM presents file tree<br>to customer for review]
+                        G("6. Customer refines cloud<br/>resource requirements")
+                        H["7. LLM interacts with customer<br/>to satisfy State Schema"]
+                        I["8. LLM generates code and<br/>Agent organizes it into a repo"]
+                        J["9. LLM presents file tree<br/>to customer for review"]
                     end
                     
                     subgraph "Phase 3: Planning & Approval"
-                        K[10a. LLM commits<br>code to Git]
-                        L[10b. LLM runs<br>Terraform Plan]
-                        M[10c. LLM calls<br>Infra Cost API]
-                        N[11. LLM presents cost report<br>and resource summary]
-                        O{12. Customer Approval?}
+                        K["10a. LLM commits<br/>code to Git"]
+                        L["10b. LLM runs<br/>Terraform Plan"]
+                        M["10c. LLM calls<br/>Infra Cost API"]
+                        N["11. LLM presents cost report<br/>and resource summary"]
+                        O{"12. Customer Approval?"}
                     end
 
                     subgraph "Phase 4: Deployment & Completion"
-                        P[13. Agent runs 'terraform apply']
-                        Q[Agent presents logs and<br>output values in chat]
-                        R(14. Customer is Happy! 😄)
+                        P["13. Agent runs<br/>'terraform apply'"]
+                        Q["Agent presents logs and<br/>output values in chat"]
+                        R("14. Customer is Happy! 😄")
                     end
 
                     %% Node Connections
@@ -108,7 +154,57 @@
     <!-- Mermaid.js script -->
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
+        
+        // Configure Mermaid for better responsiveness and readability
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#E0E7FF',
+                primaryTextColor: '#312E81',
+                primaryBorderColor: '#6366F1',
+                lineColor: '#6B7280',
+                secondaryColor: '#F3F4F6',
+                tertiaryColor: '#F9FAFB',
+                background: '#FFFFFF',
+                mainBkg: '#FFFFFF',
+                secondBkg: '#F3F4F6',
+                tertiaryBkg: '#F9FAFB'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20,
+                nodeSpacing: 50,
+                rankSpacing: 80,
+                diagramPadding: 20,
+                wrappingWidth: 200
+            },
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '14px',
+            sequence: {
+                useMaxWidth: true
+            },
+            gantt: {
+                useMaxWidth: true
+            }
+        });
+
+        // Ensure proper rendering after page load
+        window.addEventListener('load', function() {
+            // Force re-render to ensure proper sizing
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 100);
+        });
+
+        // Handle window resize for responsiveness
+        window.addEventListener('resize', function() {
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 200);
+        });
     </script>
 </body>
 </html>
